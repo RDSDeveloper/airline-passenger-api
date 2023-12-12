@@ -24,6 +24,12 @@ class AirplaneModelTest(TestCase):
             self.airplane.fuel_consumption_per_minute, expected_consumption
         )
 
+    def test_max_minutes_to_fly(self):
+        expected_minutes = (
+            self.airplane.fuel_tank_capacity / self.airplane.fuel_consumption_per_minute
+        )
+        self.assertEqual(self.airplane.max_minutes_to_fly, expected_minutes)
+
     def test_str(self):
         expected_str = f"Airplane {self.airplane.id} with {self.airplane.passenger_count} passengers"
         self.assertEqual(str(self.airplane), expected_str)
