@@ -58,7 +58,7 @@ LOCAL_APPS = [
 INSTALLED_APPS = CORE_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
-    "allauth.account.middleware.AccountMiddleware", 
+    "allauth.account.middleware.AccountMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -153,3 +153,6 @@ AUTHENTICATION_BACKENDS = (
 
 # Rest auth settings
 SITE_ID = 1
+
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
