@@ -43,6 +43,12 @@ CORE_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    "rest_framework.authtoken",
 ]
 
 LOCAL_APPS = [
@@ -52,6 +58,7 @@ LOCAL_APPS = [
 INSTALLED_APPS = CORE_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    "allauth.account.middleware.AccountMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -136,3 +143,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # User model selection
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+
+# Allauth settings
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+# Rest auth settings
+SITE_ID = 1
