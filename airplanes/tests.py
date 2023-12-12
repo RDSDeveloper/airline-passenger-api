@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from .models import Airplane
 from math import log
@@ -5,7 +6,11 @@ from math import log
 
 class AirplaneModelTest(TestCase):
     def setUp(self):
-        self.airplane = Airplane.objects.create(passenger_count=100)
+        User = get_user_model()
+        self.user = User.objects.create_user(username="testuser", password="12345")
+        self.airplane = Airplane.objects.create(
+            passenger_count=100, created_by=self.user
+        )
 
     def test_fuel_tank_capacity(self):
         expected_capacity = 200 * self.airplane.id
@@ -18,3 +23,10 @@ class AirplaneModelTest(TestCase):
         self.assertEqual(
             self.airplane.fuel_consumption_per_minute, expected_consumption
         )
+
+    def test_str(self):
+        expected_str = f"Airplane {self.airplane.id} with {self.airplane.passenger_count} passengers"
+        self.assertEqual(str(self.airplane), expected_str)
+
+    def test_created_by(self):
+        self.assertEqual(self.airplane.created_by, self.user)
