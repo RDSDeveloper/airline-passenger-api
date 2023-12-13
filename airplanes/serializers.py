@@ -10,6 +10,7 @@ class AirplaneSerializer(serializers.ModelSerializer):
         model = Airplane
         fields = [
             "id",
+            "user_defined_airplane_id",
             "passenger_count",
             "fuel_tank_capacity",
             "fuel_consumption_per_minute",
