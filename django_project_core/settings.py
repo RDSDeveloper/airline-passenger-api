@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, socket
 import environ
 from django.core.management.utils import get_random_secret_key
 
@@ -60,6 +60,7 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth.registration",
     "rest_framework.authtoken",
     "drf_spectacular",
+    "debug_toolbar",
 ]
 
 LOCAL_APPS = [
@@ -71,6 +72,7 @@ LOCAL_APPS = [
 INSTALLED_APPS = CORE_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -197,3 +199,19 @@ SPECTACULAR_SETTINGS = {
     "VERSION": f"v{API_VERSION}",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+# HTTP Strict Transport Security setup
+# Specifies the duration (in seconds) to cache HSTS information
+SECURE_HSTS_SECONDS = env.int("DJANGO_SECURE_HSTS_SECONDS", default=2592000)
+
+# Includes subdomains in HSTS policy
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
+    "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True
+)
+
+# Preload HSTS in supported browsers
+SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
+
+# Django debug toolbar setup with docker
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
