@@ -189,3 +189,11 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
+
+# Schema documentation configuration
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Kami",
+    "DESCRIPTION": "Kami Airlines aircraft passenger capacity api.",
+    "VERSION": f"v{API_VERSION}",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
