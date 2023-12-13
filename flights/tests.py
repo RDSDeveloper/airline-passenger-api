@@ -10,7 +10,9 @@ from rest_framework import status
 
 class FlightModelTest(TestCase):
     def setUp(self):
-        self.airplane = Airplane.objects.create(passenger_count=100)
+        self.airplane = Airplane.objects.create(
+            passenger_count=100, user_defined_airplane_id=1
+        )
         self.flight = Flight.objects.create(
             departure_time=timezone.now(),
             arrival_time=timezone.now() + timezone.timedelta(hours=2),
@@ -36,7 +38,9 @@ class FlightModelTest(TestCase):
 
 class FlightViewSetTestCase(APITestCase):
     def setUp(self):
-        self.airplane = Airplane.objects.create(passenger_count=100)
+        self.airplane = Airplane.objects.create(
+            passenger_count=100, user_defined_airplane_id=1
+        )
         self.flight = Flight.objects.create(
             departure_time=timezone.now(),
             arrival_time=timezone.now() + timezone.timedelta(hours=2),

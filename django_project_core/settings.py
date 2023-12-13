@@ -214,7 +214,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
 # Preload HSTS in supported browsers
 SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
 
-DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda _request: DEBUG}
+# DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda _request: DEBUG}
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [

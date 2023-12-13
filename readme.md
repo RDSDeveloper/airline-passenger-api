@@ -9,11 +9,7 @@ testpass123
 
 This project is a RESTful API built with Django and Django REST Framework. It allows users to input airplane data, including a user-defined ID and passenger assumptions. The API calculates and returns the total fuel consumption per minute and the maximum flight minutes for each airplane. It also provides flight details, including departure time, arrival time, origin, destination, and airplane details.
 
-## Starting
-
-Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
-
-### Prerequisites
+## Prerequisites
 
 You will need to have Python 3.10 or higher and Docker installed. You will also need a copy of the source code, which you can obtain by cloning the GitHub repository.
 
@@ -70,6 +66,46 @@ Once the application is running, you can access the following endpoints:
 
 Replace `<id>` with the ID of the airplane or flight you want to retrieve, update, or delete.
 
+## Endpoint Details
+
+### List all airplanes or create a new one
+
+- **URL**: `http://localhost:8000/api/v1/airplanes/`
+- **HTTP Method**: GET, POST
+- **Input Parameters (POST)**:
+    - `user_defined_airplane_id`: Integer, required
+    - `passenger_count`: Integer, required
+
+### Retrieve, update, or delete a specific airplane
+
+- **URL**: `http://localhost:8000/api/v1/airplanes/<id>/`
+- **HTTP Method**: GET, PUT, DELETE
+- **Input Parameters (PUT)**:
+    - `user_defined_airplane_id`: Integer, optional
+    - `passenger_count`: Integer, optional
+
+### List all flights or create a new one
+
+- **URL**: `http://localhost:8000/api/v1/flights/`
+- **HTTP Method**: GET, POST
+- **Input Parameters (POST)**:
+    - `departure_time`: DateTime, required
+    - `arrival_time`: DateTime, required
+    - `origin`: String (max 200 characters), required
+    - `destination`: String (max 200 characters), required
+    - `airplane`: Integer (ID of an existing airplane), required
+
+### Retrieve, update, or delete a specific flight
+
+- **URL**: `http://localhost:8000/api/v1/flights/<id>/`
+- **HTTP Method**: GET, PUT, DELETE
+- **Input Parameters (PUT)**:
+    - `departure_time`: DateTime, optional
+    - `arrival_time`: DateTime, optional
+    - `origin`: String (max 200 characters), optional
+    - `destination`: String (max 200 characters), optional
+    - `airplane`: Integer (ID of an existing airplane), optional
+    
 ### Test User
 
 To test the API, you can create your own user using the registration endpoint:
@@ -105,3 +141,4 @@ If you want to generate an HTML report, you can use the following command instea
     ```
 
 This will generate an HTML report in a new `htmlcov` directory. You can open the `index.html` file in your web browser to view the report.
+
