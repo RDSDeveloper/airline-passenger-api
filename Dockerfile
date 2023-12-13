@@ -12,7 +12,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Make port 8001 available to the world outside this container
-EXPOSE 8001
+EXPOSE 8000
 
-# Run the command to start uWSGI
-CMD ["uwsgi", "app.ini"]
+# Run the command to start Gunicorn
+CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0.0:8000"]
