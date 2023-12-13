@@ -10,15 +10,15 @@ class Airplane(models.Model):
 
     @property
     def fuel_tank_capacity(self):
-        return 200 * self.id
+        return 200 * self.id 
 
     @property
     def fuel_consumption_per_minute(self):
-        return log(self.id) * 0.80 + self.passenger_count * 0.002
+        return log(self.id) * 0.80 + self.passenger_count * 0.002 
     
     @property
     def max_minutes_to_fly(self):
         return self.fuel_tank_capacity / self.fuel_consumption_per_minute
 
     def __str__(self):
-        return f"Airplane {self.id} with {self.passenger_count} passengers"
+        return f"Airplane {self.id} with {self.passenger_count} passengers" 
