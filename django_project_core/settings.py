@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os, socket
+import os
 import environ
 from django.core.management.utils import get_random_secret_key
 
@@ -212,6 +212,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
 # Preload HSTS in supported browsers
 SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
 
-# Django debug toolbar setup with docker
-hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda _request: DEBUG
+}
