@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from typing import Any
+from math import log
 
 
 class Airplane(models.Model):
